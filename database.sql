@@ -12,5 +12,6 @@ CREATE TABLE IF NOT EXISTS users (
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
+-- Test user (optional)
 INSERT INTO users (username, email, password, bg_color, text_color, font_size) 
 VALUES ('test', 'test@example.com', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', '#f0f8ff', '#333333', '18px');

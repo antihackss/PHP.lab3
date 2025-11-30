@@ -6,20 +6,18 @@ use App\Auth;
 
 $auth = new Auth();
 
-// Автоматическая авторизация через cookies
 if (!$auth->isLoggedIn()) {
     $auth->autoLogin();
 }
 
-// Применение настроек пользователя
 $auth->applyUserSettings();
 ?>
 <!DOCTYPE html>
-<html lang="ru">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Система авторизации</title>
+    <title>Authentication System</title>
     <style>
         .container { max-width: 800px; margin: 0 auto; padding: 20px; }
         .form-group { margin-bottom: 15px; }
@@ -35,20 +33,20 @@ $auth->applyUserSettings();
     <div class="container">
         <?php if ($auth->isLoggedIn()): ?>
             <div class="nav">
-                <h2>Добро пожаловать, <?php echo $_SESSION['username']; ?>!</h2>
-                <a href="dashboard.php">Дашборд</a> |
-                <a href="settings.php">Настройки</a> |
-                <a href="logout.php">Выйти</a>
+                <h2>Welcome, <?php echo $_SESSION['username']; ?>!</h2>
+                <a href="dashboard.php">Dashboard</a> |
+                <a href="settings.php">Settings</a> |
+                <a href="logout.php">Logout</a>
             </div>
-            <p>Вы успешно авторизованы в системе.</p>
+            <p>You have successfully logged into the system.</p>
         <?php else: ?>
-            <h1>Система авторизации</h1>
+            <h1>Authentication System</h1>
             <div style="display: flex; gap: 20px;">
                 <div style="flex: 1;">
-                    <h3>Регистрация</h3>
+                    <h3>Registration</h3>
                     <form action="register.php" method="POST">
                         <div class="form-group">
-                            <label>Имя пользователя:</label>
+                            <label>Username:</label>
                             <input type="text" name="username" required>
                         </div>
                         <div class="form-group">
@@ -56,48 +54,48 @@ $auth->applyUserSettings();
                             <input type="email" name="email" required>
                         </div>
                         <div class="form-group">
-                            <label>Пароль:</label>
+                            <label>Password:</label>
                             <input type="password" name="password" required>
                         </div>
-                        <h4>Настройки оформления:</h4>
+                        <h4>Appearance Settings:</h4>
                         <div class="form-group">
-                            <label>Цвет фона:</label>
+                            <label>Background Color:</label>
                             <input type="color" name="bg_color" value="#ffffff">
                         </div>
                         <div class="form-group">
-                            <label>Цвет текста:</label>
+                            <label>Text Color:</label>
                             <input type="color" name="text_color" value="#000000">
                         </div>
                         <div class="form-group">
-                            <label>Размер шрифта:</label>
+                            <label>Font Size:</label>
                             <select name="font_size">
-                                <option value="14px">Маленький</option>
-                                <option value="16px" selected>Средний</option>
-                                <option value="18px">Большой</option>
-                                <option value="20px">Очень большой</option>
+                                <option value="14px">Small</option>
+                                <option value="16px" selected>Medium</option>
+                                <option value="18px">Large</option>
+                                <option value="20px">Extra Large</option>
                             </select>
                         </div>
-                        <button type="submit">Зарегистрироваться</button>
+                        <button type="submit">Register</button>
                     </form>
                 </div>
                 
                 <div style="flex: 1;">
-                    <h3>Авторизация</h3>
+                    <h3>Login</h3>
                     <form action="login.php" method="POST">
                         <div class="form-group">
-                            <label>Имя пользователя:</label>
+                            <label>Username:</label>
                             <input type="text" name="username" required>
                         </div>
                         <div class="form-group">
-                            <label>Пароль:</label>
+                            <label>Password:</label>
                             <input type="password" name="password" required>
                         </div>
                         <div class="form-group">
                             <label>
-                                <input type="checkbox" name="remember"> Запомнить меня
+                                <input type="checkbox" name="remember"> Remember me
                             </label>
                         </div>
-                        <button type="submit">Войти</button>
+                        <button type="submit">Login</button>
                     </form>
                 </div>
             </div>

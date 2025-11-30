@@ -12,7 +12,6 @@ class Auth
 
     public function register($username, $email, $password, $settings = [])
     {
-        // Проверка существования пользователя
         if ($this->user->findByUsername($username)) {
             throw new \Exception("Username already exists");
         }
@@ -21,7 +20,6 @@ class Auth
             throw new \Exception("Email already exists");
         }
 
-        // Создание пользователя
         $bgColor = $settings['bg_color'] ?? '#ffffff';
         $textColor = $settings['text_color'] ?? '#000000';
         $fontSize = $settings['font_size'] ?? '16px';
@@ -34,11 +32,9 @@ class Auth
         $user = $this->user->findByUsername($username);
 
         if ($user && password_verify($password, $user['password'])) {
-            // Установка сессии
             $_SESSION['user_id'] = $user['id'];
             $_SESSION['username'] = $user['username'];
 
-            // Установка cookies с настройками
             $this->setUserCookies($user, $remember);
 
             return $user;
@@ -67,10 +63,8 @@ class Auth
             $userId = $_COOKIE['user_id'];
             $userToken = $_COOKIE['user_token'];
 
-            // Здесь можно добавить проверку токена в базе данных
             if (!isset($_SESSION['user_id'])) {
                 $_SESSION['user_id'] = $userId;
-                // Загружаем настройки из cookies
                 $this->applyUserSettings();
                 return true;
             }
@@ -98,11 +92,8 @@ class Auth
 
     public function logout()
     {
-        // Очистка сессии
-        session_unset();
         session_destroy();
 
-        // Очистка cookies
         setcookie('user_id', '', time() - 3600, '/');
         setcookie('user_token', '', time() - 3600, '/');
         setcookie('bg_color', '', time() - 3600, '/');

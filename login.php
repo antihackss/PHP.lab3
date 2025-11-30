@@ -17,7 +17,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         header('Location: dashboard.php');
         exit;
     } else {
-        $error = "Неверное имя пользователя или пароль";
+        $error = "Invalid username or password";
     }
 }
 

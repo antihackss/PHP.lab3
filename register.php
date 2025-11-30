@@ -21,7 +21,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $settings
         );
 
-        // Автоматический вход после регистрации
         $user = $auth->login($_POST['username'], $_POST['password']);
         if ($user) {
             header('Location: dashboard.php');
